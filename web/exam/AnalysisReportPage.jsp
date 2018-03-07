@@ -119,6 +119,7 @@
             $(document).ready(function () {
                 var fail = $("#failcount").val();
                 var total = $("#tstrength").val();
+                $("#strengthh").html("TOTAL STRENGTH:"+total);
                 var pass = total - fail;
                 var per = ((total - fail) / total) * 100;
                 //console.log(per);
@@ -175,14 +176,8 @@
     <h2 style="margin-left: 10px;">SEM: <%=sem%></h2>
     <h2 style="margin-left: 10px;">SEC: <%=sec%></h2>
 
-    <%
-        String sql = "select count(*) from student_personal where batch='" + batch + "' and sec='" + sec + "' and model_type like '" + "%" + "'";
-        ResultSet strength = st.executeQuery(sql);
-        strength.next();
-        String tstrength = strength.getString(1);
-    %>
 
-    <h2 style="margin-left: 10px;">TOTAL STRENGTH: <%=tstrength%></h2>
+    <h2 style="margin-left: 10px;" id="strengthh"></h2>
     <div id="load_values"></div>
     <div id="overallpass" style="margin-left: 10px;">
         <%
@@ -197,8 +192,7 @@
             }
         %>
     </div>
-    <input type="hidden" id="tstrength" value="<%=tstrength%>"> 
-
+    
 
     <table class="bordered" border="3" style="margin-left: 10px;margin-top: -10px;">
         <col width="100">
@@ -282,7 +276,7 @@
                     }
                         f-=a;
 
-                    pp = (float) (p + a - f) / (float) (p + a) * 100;
+                    pp = (float) (p - f) / (float) (p ) * 100;
                     classavg = gtotal / (float) p;
 
                     /*str1[count]=rollno;
@@ -291,7 +285,7 @@
         session.setAttribute("name",str2[count]);*/
 
         %>
-
+         <input type="hidden" id="tstrength" value="<%=p+a%>"> 
         <tr>
 
 
