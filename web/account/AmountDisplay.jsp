@@ -1,3 +1,9 @@
+<%@page import="java.util.Map"%>
+<%@page import="Fee.IBResponse"%>
+<%@page import="General.Batch"%>
+<%@page import="Actor.Student"%>
+<%@page import="Fee.TechProcessResponse"%>
+<%@page import="Fee.TechProcess"%>
 <!DOCTYPE html>
 <%@page import="com.action.Find"%>
 <%@page import="Fee.MUResponse"%>
@@ -153,9 +159,10 @@ h2{
            PrintWriter outt=response.getWriter();
             Connection con=new dbcon().getConnection("sjitportal");
             int count1=0,count2=0,count3=0,count4=0,count5=0,count6=0,count7=0,count8=0,count9=0,count10=0,count11=0,count12=0;
-            double sum1= 0.00,sum2=0.00,sum3=0.00,sum4=0.00,sum5=0.00,sum6=0.00,sum7=0.00,sum8=0.00,sum9=0.00,sum10=0.00,sum11=0.00,sum12=0.00;
-            String from=request.getParameter("from");
-            String to=request.getParameter("to");
+            int totalcount1=0,totalcount2=0,totalcount3=0,totalcount4=0,totalcount5=0,totalcount6=0,totalcount7=0,totalcount8=0,totalcount9=0,totalcount10=0,totalcount11=0,totalcount12=0;
+            float sum1= 0,sum2=0,sum3=0,sum4=0,sum5=0,sum6=0,sum7=0,sum8=0,sum9=0,sum10=0,sum11=0,sum12=0;
+            String from= (String) request.getParameter("from");
+            String to= (String) request.getParameter("to");
             String acyear=request.getParameter("ayear");
              Date FromDate = new SimpleDateFormat("yyyy-MM-dd").parse(from);
              Date ToDate = new SimpleDateFormat("yyyy-MM-dd").parse(to);
@@ -174,210 +181,195 @@ h2{
             dates.add(cal1.getTime());
             cal1.add(Calendar.DATE, 1);
         }
-      ArrayList<MUResponse> m=MUResponse.fetchby(acyear);
-      
+      ArrayList<MUResponse> List = (ArrayList<MUResponse>) MUResponse.fetchby(acyear);
        for(int i=0;i<dates.size();i++){
            
                          %>
                          <tr>
                              <td><%=new SimpleDateFormat("dd-MM-yyyy").format(dates.get(i))%></td>
                 <%
+                    
                        if(dates.get(i).before(ToDate) || dates.get(i).equals(ToDate)){
-                for(MUResponse m1:m){
-                    PreparedStatement stt=con.prepareStatement("select * from techprocess where mupno=? and status=0300");
-                    stt.setString(1, m1.getRefno());
-                    ResultSet rss=stt.executeQuery();
-                    if(rss.next()){
-                        String rollno=rss.getString("clientid");
-                        if(Find.sdept(rollno)!=null){
-                        Connection conn=new dbcon().getConnection(Find.sdept(rollno));
-                        PreparedStatement st2=conn.prepareStatement("select * from student_personal where rollno=?");
-                st2.setString(1, rollno);
-                ResultSet rs2=st2.executeQuery();
-                if(rs2.next()){
-                    String batch=rs2.getString("batch");
-                PreparedStatement st3=con.prepareStatement("select * from regulations where batch=?");
-                st3.setString(1, batch);
-                ResultSet rs3=st3.executeQuery();
-                if (rs3.next()){
-                    String status=rs3.getString("status");
-                if(status.equals("I")){
-                        String datess=rss.getString("time");
-                        String[] t = datess.split(" ");
-                        
+                    List<TechProcessResponse> clist=TechProcessResponse.fetchby(List, from, to);
+                    for(TechProcessResponse t1:clist){
+                        String rollno=t1.getRollno();
+                        Student s=Student.getById(rollno);
+                        String batch=s.getBatch();
+                        Batch b=Batch.getByBatch(batch);
+                        String status=b.getStatus();
+                        if(status.equals("I")){
+                            String datess=t1.getTime();
+                            String[] t = datess.split(" ");
                     Date time = new SimpleDateFormat("dd-MM-yyyy").parse(t[0]);
                     if(time.equals(dates.get(i))){
-                        count1++;
-                        double amount=Double.parseDouble(rss.getString("txn_amount"));
+                        count1=count1+1;
+                        float amount=Float.parseFloat(t1.getAmount());
                         sum1=sum1+amount;
+                        totalcount1++;
                     }   
                     }
-                else if(status.equals("II")){
-                       String datess=rss.getString("time");
+                    else if(status.equals("II")){
+                       String datess=t1.getTime();
                         String[] t = datess.split(" ");
                         
                     Date time = new SimpleDateFormat("dd-MM-yyyy").parse(t[0]);
                     if(time.equals(dates.get(i))){
                         count2++;
-                        double amount=Double.parseDouble(rss.getString("txn_amount"));
+                        float amount=Float.parseFloat(t1.getAmount());
                         sum2=sum2+amount;
-                    }
+                        totalcount2++;
+                        }
                 }
                 else if(status.equals("III")){
-                      String datess=rss.getString("time");
+                      String datess=t1.getTime();
                         String[] t = datess.split(" ");
                         
                     Date time = new SimpleDateFormat("dd-MM-yyyy").parse(t[0]);
                     if(time.equals(dates.get(i))){
                         count3++;
-                       double amount=Double.parseDouble(rss.getString("txn_amount"));
+                       float amount=Float.parseFloat(t1.getAmount());
                        sum3=sum3+amount;
+                       totalcount3++;
                     }
                 }
                 else{
-                      String datess=rss.getString("time");
+                      String datess=t1.getTime();
                         String[] t = datess.split(" ");
                         
                     Date time = new SimpleDateFormat("dd-MM-yyyy").parse(t[0]);
                     if(time.equals(dates.get(i))){
                         count4++;
-                       double amount=Double.parseDouble(rss.getString("txn_amount"));
+                       float amount=Float.parseFloat(t1.getAmount());
                        sum4=sum4+amount;
+                       totalcount4++;
                     }
                 }
-                }
-                }
-                }
-                    }
-                   PreparedStatement st1=con.prepareStatement("select * from ibresponse where mup=? and status=?");
-                    st1.setString(1, m1.getRefno());
-                   st1.setString(2, "Y");
-                    ResultSet rs1=st1.executeQuery();
-                    if(rs1.next()){
-                          //String rollno1=rs1.getString("rollno");
-                          if(Find.sdept(rs1.getString("rollno"))!=null){
-                          Connection connn=new dbcon().getConnection(Find.sdept(rs1.getString("rollno")));
-                        PreparedStatement sttt=connn.prepareStatement("select * from student_personal where rollno=?");
-                sttt.setString(1, rs1.getString("rollno"));
-                ResultSet rs4=sttt.executeQuery();
-                if(rs4.next()){
-                    String batch=rs4.getString("batch");
-                PreparedStatement st4=con.prepareStatement("select * from regulations where batch=?");
-                st4.setString(1, batch);
-                ResultSet rs5=st4.executeQuery();
-                if (rs5.next()){
-                    String status=rs5.getString("status");
-                if(status.equals("I")){
+                        float amount=0;
+            }
+                   for(Map.Entry<MUResponse,IBResponse> entry : IBResponse.fetchby(List, from, to).entrySet()){
+                       MUResponse m2=entry.getKey();
+                          IBResponse ib=entry.getValue();
+                          String rollno1=ib.getRollno();
+                          Student s1=Student.getById(rollno1);
+                          String batchh=s1.getBatch();
+                          Batch b1=Batch.getByBatch(batchh);
+                          String status=b1.getStatus();
+                    if(status.equals("I")){
                
-                        if(!rs1.getString("journalno").equals("challan")){
-                        String datess=rs1.getString("txndate");
+                        if(!ib.getJournalno().equals("challan")){
+                        String datess=ib.getTxndate();
                         String[] t1 = datess.split(" ");
                         
                     Date time = new SimpleDateFormat("dd/MM/yyyy").parse(t1[0]);
                     if(time.equals(dates.get(i))){
                         count5++;
-                       double amount1=Double.parseDouble(m1.getTotalamt());
+                       float amount1=Float.parseFloat(m2.getTotalamt());
                         sum5=sum5+amount1;
+                        totalcount5++;
                     }
                     }
                         else{
-                        String datess=rs1.getString("txndate");
+                        String datess=ib.getTxndate();
                         String[] t = datess.split(" ");
                     Date time = new SimpleDateFormat("dd/MM/yyyy").parse(t[0]);
                     if(time.equals(dates.get(i))){
                     
                         count6++;
-                       double amount1=Double.parseDouble(m1.getTotalamt());
+                       float amount1=Float.parseFloat(m2.getTotalamt());
                        sum6=sum6+amount1;
+                       totalcount6++;
                     }    
                         }
                     }
                 else if(status.equals("II")){
                
-                        if(!rs1.getString("journalno").equals("challan")){
-                        String datess=rs1.getString("txndate");
+                        if(!ib.getJournalno().equals("challan")){
+                        String datess=ib.getTxndate();
                         String[] t1 = datess.split(" ");
                         
                     Date time = new SimpleDateFormat("dd/MM/yyyy").parse(t1[0]);
                     if(time.equals(dates.get(i))){
                         count7++;
-                       double amount1=Double.parseDouble(m1.getTotalamt());
+                       float amount1=Float.parseFloat(m2.getTotalamt());
                        sum7=sum7+amount1;
+                       totalcount7++;
                     }
                     }
                         else{
-                        String datess=rs1.getString("txndate");
+                        String datess=ib.getTxndate();
                         String[] t = datess.split(" ");
                     Date time = new SimpleDateFormat("dd/MM/yyyy").parse(t[0]);
                     if(time.equals(dates.get(i))){
                     
                         count8++;
-                       double amount1=Double.parseDouble(m1.getTotalamt());
+                       float amount1=Float.parseFloat(m2.getTotalamt());
                        sum8=sum8+amount1;
+                       totalcount8++;
                     }    
                         }
                     }
                 else if(status.equals("III")){
                
-                        if(!rs1.getString("journalno").equals("challan")){
-                        String datess=rs1.getString("txndate");
+                        if(!ib.getJournalno().equals("challan")){
+                        String datess=ib.getTxndate();
                         String[] t1 = datess.split(" ");
                         
                     Date time = new SimpleDateFormat("dd/MM/yyyy").parse(t1[0]);
                     if(time.equals(dates.get(i))){
                         count9++;
-                       double amount1=Double.parseDouble(m1.getTotalamt());
+                       float amount1=Float.parseFloat(m2.getTotalamt());
                        sum9=sum9+amount1;
+                       totalcount9++;
                     }
                     }
                         else{
-                        String datess=rs1.getString("txndate");
+                        String datess=ib.getTxndate();
                         String[] t = datess.split(" ");
                     Date time = new SimpleDateFormat("dd/MM/yyyy").parse(t[0]);
                     if(time.equals(dates.get(i))){
                     
                         count10++;
-                       double amount1=Double.parseDouble(m1.getTotalamt());
+                       float amount1=Float.parseFloat(m2.getTotalamt());
                        sum10=sum10+amount1;
+                       totalcount10++;
                     }    
                         }
                     }
                else{
                
-                        if(!rs1.getString("journalno").equals("challan")){
-                        String datess=rs1.getString("txndate");
+                        if(!ib.getJournalno().equals("challan")){
+                        String datess=ib.getTxndate();
                         String[] t1 = datess.split(" ");
                         
                     Date time = new SimpleDateFormat("dd/MM/yyyy").parse(t1[0]);
                     if(time.equals(dates.get(i))){
                         count11++;
-                       double amount1=Double.parseDouble(m1.getTotalamt());
+                       float amount1=Float.parseFloat(m2.getTotalamt());
                        sum11=sum11+amount1;
+                       totalcount11++;
                     }
                     }
                         else{
-                        String datess=rs1.getString("txndate");
+                        String datess=ib.getTxndate();
                         String[] t = datess.split(" ");
                     Date time = new SimpleDateFormat("dd/MM/yyyy").parse(t[0]);
                     if(time.equals(dates.get(i))){
                     
                         count12++;
-                       double amount1=Double.parseDouble(m1.getTotalamt());
+                       float amount1=Float.parseFloat(m2.getTotalamt());
                        sum12=sum12+amount1;
+                       totalcount12++;
                     }    
-                        }
-                }
                 }
             }
+                    float amount1=0;
         }
     
-                    }
-                }
                         %>
-                         <td><%=count1%></td><td><%=count5%></td><td><%=count6%>
-            </td><td><%=count2%></td><td><%=count7%></td><td><%=count8%>
-            </td><td><%=count3%></td><td><%=count9%></td><td><%=count10%>
-            </td><td><%=count4%></td><td><%=count11%></td><td><%=count12%></td>
+                         <td><%=count5%></td><td><%=count1%></td><td><%=count6%>
+            </td><td><%=count7%></td><td><%=count2%></td><td><%=count8%>
+            </td><td><%=count9%></td><td><%=count3%></td><td><%=count10%>
+            </td><td><%=count11%></td><td><%=count4%></td><td><%=count12%></td>
             </tr>
             <%
                   
@@ -396,10 +388,15 @@ h2{
         count12=0;
                 }
               %>
-              <tr><td>Total Amount</td><td><%=sum1%></td><td><%=sum5%></td><td><%=sum6%>
-            </td><td><%=sum2%></td><td><%=sum7%></td><td><%=sum8%>
-            </td><td><%=sum3%></td><td><%=sum9%></td><td><%=sum10%>
-            </td><td><%=sum4%></td><td><%=sum11%></td><td><%=sum12%></td></tr>
+              <tr><td>Total Count</td><td><%=totalcount5%></td><td><%=totalcount1%></td><td><%=totalcount6%>
+            </td><td><%=totalcount7%></td><td><%=totalcount2%></td><td><%=totalcount8%>
+            </td><td><%=totalcount9%></td><td><%=totalcount3%></td><td><%=totalcount10%>
+            </td><td><%=totalcount11%></td><td><%=totalcount4%></td><td><%=totalcount12%></td></tr>
+    
+              <tr><td>Total Amount</td><td><%=sum5%></td><td><%=sum1%></td><td><%=sum6%>
+            </td><td><%=sum7%></td><td><%=sum2%></td><td><%=sum8%>
+            </td><td><%=sum9%></td><td><%=sum3%></td><td><%=sum10%>
+            </td><td><%=sum11%></td><td><%=sum4%></td><td><%=sum12%></td></tr>
     
        </center>
             </body>

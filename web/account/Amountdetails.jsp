@@ -54,7 +54,7 @@
 <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="">Payment</a>
     <ul class="sub-menu">
 	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="paymentdetail.jsp">Payment Details</a>
-            
+            <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="Amountdetails.jsp">Amount Details</a>
             </ul>
         </li>     
     </ul>
@@ -71,7 +71,7 @@
 
 <section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
              <center>
-            <form action="AmountDispaly.jsp" class="sky-form" >
+            <form action="AmountDisplay.jsp" class="sky-form" >
                 <header>TECHNOLOGY</header>
     <fieldset>					
 					<section>
