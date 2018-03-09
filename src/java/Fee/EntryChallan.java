@@ -28,9 +28,9 @@ public class EntryChallan extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-          response.setContentType("text/html");
-           PrintWriter out = response.getWriter();
-        int i=0;  
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+        int i = 0;
         try {
             // processRequest(request, response);
             String rollno = request.getParameter("rollno");
@@ -47,17 +47,32 @@ public class EntryChallan extends HttpServlet {
             st.setString(3, mop);
             st.setString(4, date);
             i = st.executeUpdate();
-         
+
         } catch (SQLException ex) {
             Logger.getLogger(EntryChallan.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {
             Logger.getLogger(EntryChallan.class.getName()).log(Level.SEVERE, null, ex);
         }
-         if (i == 1) {
-                out.println("Paid");
-            } else {
-                out.println("NotPaid");
-            }
+        if (i == 1) {
+            out.println("Paid");
+        } else {
+            out.println("NotPaid");
+        }
 
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+       String status = "Not Paid";
+        IBResponse i = null;
+        String mup = request.getParameter("mup");
+        i = IBResponse.getByMup(mup);
+        if (i != null) {
+            status="Paid";
+        }
+        out.print(status);
     }
 }
