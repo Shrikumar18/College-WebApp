@@ -63,6 +63,7 @@
              Student stu = Student.getById(m.getRollno());
              if(Batch.equals(stu.getBatch()) && ((Dept.equals(stu.getDept()) || Dept.equals("%")) ))
              {
+                 System.out.println("h1");
     %>
             
     <tr>

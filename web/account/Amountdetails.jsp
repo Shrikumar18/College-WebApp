@@ -1,7 +1,7 @@
 <%-- 
-    Document   : paymentdetail
-    Created on : 13 Mar, 2017, 1:40:27 PM
-    Author     : Irshed
+    Document   : TechAmount
+    Created on : Feb 23, 2018, 11:33:49 AM
+    Author     : santhosh
 --%>
 
 <%@page import="General.Batch"%>
@@ -71,34 +71,17 @@
 
 <section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
              <center>
-            <form action="${pageContext.request.contextPath}/PaymentDetails" class="sky-form" method="post">
+            <form action="AmountDisplay.jsp" class="sky-form" >
                 <header>TECHNOLOGY</header>
     <fieldset>					
 					<section>
-                   <label class="input">
-                     <div align="left" size="3px"><b>
-                               Type :  </b></div>
-                <label class="select">
-                    
-                 <select id="batch" name="banktype" required>
-                   <option disabled selected>select</option>
-                
-                <option value="ibank">Indian Bank  </option>
-                <option value="otherbank">Other Banks </option>
-             </select>  
-             
-                <i></i>
-                    </label>
-            </label>
-                                               
-                            <br><br>
-                  
+                                            
                <label class="input">
-                                                    <div align="left" size="3px"><b>
+                                                    <div align="left" size="3px" name="ayear"><b>
                                                             Academic Year : </b></div>
                 <label class="select">
                     
-                 <select id="batch" name="Year" required>
+                 <select id="batch" name="ayear" required>
                 <option disabled selected>Select   </option>
                 <%=AcademicYear.getHTMLContent()%>
             </select>   
@@ -107,43 +90,9 @@
                     </label>
             </label>
                  <br><br> 
-            <label class="input">
-                                                    <div align="left" size="3px"><b>
-                                                            Batch : </b></div>
-                <label class="select">
-                    
-                 <select id="batch" name="Batch" required>
-                <option disabled selected>Select   </option>
-                <%=Batch.getHTMLContent()%>
-            </select>   
-           
-                <i></i>
-                    </label>
-            </label>
-                 <br><br>
                 
              <label class="input">
-                                                    <div align="left" size="3px"><b>
-                                                            Department : </b></div>
-                <label class="select">
-                    
-                 <select id="batch" name="dept" required>
-                <option disabled selected>Select </option>
-                <option value ="all">All</option>
-                <option value ="cse">CSE</option>
-                <option value ="ece">ECE</option>
-                <option value ="eee">EEE</option>
-                <option value ="mech">MECH</option>
-                <option value ="civil">CIVIL</option>
-                <option value ="it">IT</option>
-            </select>   
-           
-                <i></i>
-                    </label>
-            </label>
-            <br><br>
-             <label class="input">
-                                                    <div align="left" size="3px" id="div7"><b>
+                                                    <div align="left" size="3px" id="div7" name="from"><b>
                                                             From Date</b></div>
                 <label class="date">
             
@@ -154,7 +103,7 @@
                 </label></label>
                   
                  <label class="input">
-                                                    <div align="left" size="3px" id="div7"><b>
+                                                    <div align="left" size="3px" id="div7" name="to"><b>
                                                             To Date</b></div>
                 <label class="date">
             

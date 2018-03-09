@@ -48,7 +48,7 @@
 <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="">Payment</a>
     <ul class="sub-menu">
 	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="paymentdetail.jsp">Payment Details</a>
-            
+            <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="Amountdetails.jsp">Amount Details</a>
             </ul>
         </li>     
     </ul>
