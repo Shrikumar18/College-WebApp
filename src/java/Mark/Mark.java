@@ -201,4 +201,19 @@ public class Mark {
         }
         return list;
     }
+    public static String deleteMark(Mark m){
+        try {
+            Connection con = new dbcon().getConnection(Find.sdept(m.getRollno()));
+            PreparedStatement st1 = null;
+            String sql1 = "delete from marks where  rollno=? and  subcode=? and  type=?";
+            st1 = con.prepareStatement(sql1);
+            st1.setString(1, m.getRollno());
+            st1.setString(2, m.getSubcode());
+            st1.setString(3, m.getType());
+            int i  = st1.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(Mark.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       return "Updated";
+    }
 }
