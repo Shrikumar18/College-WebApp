@@ -316,24 +316,25 @@ and open the template in the editor.
                                             u1 =1;
                                        }                                       
                                     }
-                                    if(marku2!=null && !marku2.equals("A") && !marku2.equals("N")){
+                                   if(marku2!=null && !marku2.equals("A") && !marku2.equals("N")){
                                        total += Integer.parseInt(marku2);
                                        float x = (float)(((float)total/150.0)*100.0);
-                                       gtotal= (int)(x+0.99);
+                                       gtotal= (int)(x+0.5);
+                                       float  temp = (float) (((float)total/150.0)*75.0);
                                        if(Integer.parseInt(marku2)<34 && u1!=0){
                                            if(zmarku2!=null && !zmarku2.equals("A") && !zmarku2.equals("N")){
                                                if(Integer.parseInt(zmarku2)>34 && u1!=0){
-                                                if (bonus != 0) {
-   
-                                               gtotal=Find.calcBonus(total, Student.getById(rollno).getModel_type());
-                                                }                                           
+                                                 if(bonus!=0){  
+                                               gtotal=Find.calcBonus((int)temp, Student.getById(rollno).getModel_type());
+                                                 }
                                                }
                                          }
-                                       }else{if (bonus != 0) {
+                                       }else{
+                                           if (bonus != 0) {
    
-                                               gtotal=Find.calcBonus(total, Student.getById(rollno).getModel_type());
+                                               gtotal=Find.calcBonus((int)temp, Student.getById(rollno).getModel_type());
                                                 }
-                                       }                                       
+                                           }                                       
                                     }
                                     }                       
                                     break;
@@ -368,7 +369,7 @@ and open the template in the editor.
                                     if(marku2!=null && !marku2.equals("A") && !marku2.equals("N")){
                                        total += Integer.parseInt(marku2);
                                        float x = (float)(((float)total/150.0)*100.0);
-                                       gtotal= (int)(x+0.99);
+                                       gtotal= (int)(x+0.5);
                                        float  temp = (float) (((float)total/150.0)*75.0);
                                        if(Integer.parseInt(marku2)<34 && u1!=0){
                                            if(zmarku2!=null && !zmarku2.equals("A") && !zmarku2.equals("N")){
