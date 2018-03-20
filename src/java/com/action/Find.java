@@ -253,7 +253,7 @@ public class Find {
                return (int)(t+0.99);
            }
         }
-        if(category.equals("<7")){
+        if(category.equals("6+")){
             if (mark>=38){
             return 100;
            }else{
@@ -262,8 +262,30 @@ public class Find {
                return (int)(t+0.99);
            }
         }
+       if(category.equals("<6")){
+            if (mark>=34){          
+                if(mark<38){
+                 t = (float)((mark/75.0)*100.0);
+                 t= Math.round(t);
+                 int x = (int) t;
+                 return (x*2);
+             }
+                return 100;
+           }else{
+               t = (float) ((mark/75.0)*100.0);
+               t += t/2;
+               return (int)(t+0.99);
+           }
+        }
         if(category.equals("0")){
-        return 100;
+               t = (float) ((mark/75.0)*100.0);
+               t=Math.round(t);
+               int x =(int)(t*2);
+               if(x>100){
+                   return 100;
+               }else{
+                 return x;   
+               }         
         }
     return 0;
     }  

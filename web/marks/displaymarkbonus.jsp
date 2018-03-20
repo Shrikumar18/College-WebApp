@@ -308,7 +308,7 @@ and open the template in the editor.
                                        total = Integer.parseInt(marku1);
                                        if(Integer.parseInt(marku1)<34){
                                            if(zmarku1!=null && !zmarku1.equals("A") && !zmarku1.equals("N")){
-                                               if(Integer.parseInt(zmarku1)>34){
+                                               if(Integer.parseInt(zmarku1)>=38){
                                                u1=1;
                                                }
                                          }
@@ -316,14 +316,16 @@ and open the template in the editor.
                                             u1 =1;
                                        }                                       
                                     }
+                                    gtotal= total;
                                    if(marku2!=null && !marku2.equals("A") && !marku2.equals("N")){
                                        total += Integer.parseInt(marku2);
                                        float x = (float)(((float)total/150.0)*100.0);
-                                       gtotal= (int)(x+0.5);
+                                       gtotal= (int)(Math.round(x));
                                        float  temp = (float) (((float)total/150.0)*75.0);
-                                       if(Integer.parseInt(marku2)<34 && u1!=0){
+                                       temp = Math.round(temp);
+                                       if(Integer.parseInt(marku2)<34){
                                            if(zmarku2!=null && !zmarku2.equals("A") && !zmarku2.equals("N")){
-                                               if(Integer.parseInt(zmarku2)>34 && u1!=0){
+                                               if(Integer.parseInt(zmarku2)>=38 && u1!=0){
                                                  if(bonus!=0){  
                                                gtotal=Find.calcBonus((int)temp, Student.getById(rollno).getModel_type());
                                                  }
@@ -331,9 +333,10 @@ and open the template in the editor.
                                          }
                                        }else{
                                            if (bonus != 0) {
-   
+                                               if(u1!=0){
                                                gtotal=Find.calcBonus((int)temp, Student.getById(rollno).getModel_type());
                                                 }
+                                           }
                                            }                                       
                                     }
                                     }                       
@@ -358,7 +361,7 @@ and open the template in the editor.
                                        total = Integer.parseInt(marku1);
                                        if(Integer.parseInt(marku1)<34){
                                            if(zmarku1!=null && !zmarku1.equals("A") && !zmarku1.equals("N")){
-                                               if(Integer.parseInt(zmarku1)>34){
+                                               if(Integer.parseInt(zmarku1)>=38){
                                                u1=1;
                                                }
                                          }
@@ -366,14 +369,16 @@ and open the template in the editor.
                                             u1 =1;
                                        }                                       
                                     }
-                                    if(marku2!=null && !marku2.equals("A") && !marku2.equals("N")){
+                                    gtotal= total;
+                                   if(marku2!=null && !marku2.equals("A") && !marku2.equals("N")){
                                        total += Integer.parseInt(marku2);
                                        float x = (float)(((float)total/150.0)*100.0);
-                                       gtotal= (int)(x+0.5);
+                                       gtotal= (int)(Math.round(x));
                                        float  temp = (float) (((float)total/150.0)*75.0);
-                                       if(Integer.parseInt(marku2)<34 && u1!=0){
+                                       temp = Math.round(temp);
+                                       if(Integer.parseInt(marku2)<34){
                                            if(zmarku2!=null && !zmarku2.equals("A") && !zmarku2.equals("N")){
-                                               if(Integer.parseInt(zmarku2)>34 && u1!=0){
+                                               if(Integer.parseInt(zmarku2)>=38 && u1!=0){
                                                  if(bonus!=0){  
                                                gtotal=Find.calcBonus((int)temp, Student.getById(rollno).getModel_type());
                                                  }
@@ -381,9 +386,10 @@ and open the template in the editor.
                                          }
                                        }else{
                                            if (bonus != 0) {
-   
+                                               if(u1!=0){
                                                gtotal=Find.calcBonus((int)temp, Student.getById(rollno).getModel_type());
                                                 }
+                                           }
                                            }                                       
                                     }
                                     }
@@ -401,9 +407,7 @@ and open the template in the editor.
                                      if(markm3!=null && !markm3.equals("A") && !markm3.equals("N")){
                                        total += Integer.parseInt(markm3);
                                         float  mark = (float) (((float)Integer.parseInt(markm3))*0.75);
-                                        if(Student.getById(rollno).getModel_type().equals("<7")){
-                                            mark+=0.5;
-                                        }
+                                        mark = Math.round(mark);
                                        if(Integer.parseInt(markm3)<45){
                                            if(zmarkm3!=null && !zmarkm3.equals("A") && !zmarkm3.equals("N")){
                                                

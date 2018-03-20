@@ -53,12 +53,11 @@
             <center>  
                 <select name="<%=s.getId() %>">
                     <option value="<%=s.getModel_type() %>"><%=s.getModel_type() %></option>
-                    <option value="0">Arrears</option>
-                    <option value="8+">8.0-10</option>
-                    <option value="7+">7.0-7.99</option>
-                    <option value="<7">less than 7.0</option>
-                    
-                    
+                    <option value="8+">8.01-10</option>
+                    <option value="7+">7.01-8.0</option>
+                    <option value="6+">6.01-7.0</option>
+                    <option value="<6">All Clear (<= 6.0)</option>
+                    <option value="0">Arrears</option>                                       
                 </select>
             </center>
                 </td>
@@ -70,8 +69,8 @@
 
       %>      
         </table>
-        </center>
-    <input type="submit" value="submit">
+        </center><br>
+        <center><input type="submit" value="submit"></center>
         </form>
     </body>
 </html
