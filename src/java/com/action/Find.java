@@ -236,51 +236,46 @@ public class Find {
     public static int calcBonus(int mark,String category){
         float t=0.0F;   
         if(category.equals("8+")){
-            if (mark>=45){
+            if (mark>=60){
             return 100;
            }else{
-               t = (float) (((float)mark/75.0)*100.0);
-               t += t/2;
-               return (int)(t+0.99);
+               t = mark/2;
+               t= Math.round(t);
+               return (int)(t);
            }
         }
         if(category.equals("7+")){
-            if (mark>=41){
+            if (mark>=55){
                 return 100;
            }else{
-               t = (float) ((mark/75.0)*100.0);
-               t += t/2;
-               return (int)(t+0.99);
+               t = mark/2;
+               t = Math.round(t);
+               return (int)(t);
            }
         }
         if(category.equals("6+")){
-            if (mark>=38){
+            if (mark>=50){
             return 100;
            }else{
-               t = (float) ((mark/75.0)*100.0);
-               t += t/2;
-               return (int)(t+0.99);
+               t = mark/2;
+               t=Math.round(t);
+               return (int)(t);
            }
         }
        if(category.equals("<6")){
-            if (mark>=34){          
-                if(mark<38){
-                 t = (float)((mark/75.0)*100.0);
-                 t= Math.round(t);
-                 int x = (int) t;
-                 return (x*2);
+            if (mark>=45){          
+                if(mark<50){
+                 return (mark*2);
              }
                 return 100;
            }else{
-               t = (float) ((mark/75.0)*100.0);
-               t += t/2;
-               return (int)(t+0.99);
+               t = mark/2;
+               t=Math.round(t);
+               return (int)(t);
            }
         }
         if(category.equals("0")){
-               t = (float) ((mark/75.0)*100.0);
-               t=Math.round(t);
-               int x =(int)(t*2);
+               int x =mark*2;
                if(x>100){
                    return 100;
                }else{
