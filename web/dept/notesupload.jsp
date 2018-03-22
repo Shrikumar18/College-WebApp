@@ -353,6 +353,7 @@
                                                     <option value="Syllabus">Syllabus</option>
                                                     <option value="Prev_univ_ans">Previous University Answers</option>
                                                     <option value="Assignment_ques">Assignment Questions</option>
+                                                    <option value="Iae_keys">IAE Answer Key</option>
                                                 </select>
 
                                                 <i></i>
