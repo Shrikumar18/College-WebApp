@@ -75,6 +75,7 @@ public class Mark {
                 st.setString(3, m.getType());
                 st.setString(4, m.getMark());
                 st.executeUpdate();
+                System.out.println("Updated-"+m.getRollno()+"-"+m.getSubcode()+"-"+m.getType()+"-"+m.getMark());
                 return "Updated";
             } else {
                 String sql2 = "update marks set mark=? where rollno=? and subcode=? and type=?";
@@ -84,6 +85,7 @@ public class Mark {
                 st2.setString(3, m.getSubcode());
                 st2.setString(4, m.getType());
                 int i = st2.executeUpdate();
+                System.out.println("Updated-"+m.getRollno()+"-"+m.getSubcode()+"-"+m.getType()+"-"+m.getMark());
                 if (i == 1) {
                     return "Updated";
                 } else {
