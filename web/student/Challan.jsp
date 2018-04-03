@@ -29,8 +29,8 @@
             if (rsss.isBeforeFirst()) {
 
                 session.setAttribute("deptname", Find.sdept(username));
-                MUResponse mu = (MUResponse) session.getAttribute("MUResponse");
-                boolean feepaid = false;
+                 MUResponse mu = (MUResponse) session.getAttribute("MUResponse");
+                 boolean feepaid = false;
                 if (request.getAttribute("paid") != null) {
                     if (request.getAttribute("paid").toString().equals("Y")) {
                         feepaid = true;
@@ -220,7 +220,11 @@
                     </div>
                 </div>
 
-
+               <div style=" clear:both; float:none; page-break-before: left;">
+                   <div style="border: 2px; width: 1100px"><br><br>
+                       <img style="border: 2px; width: 1100px; height: 600px"  src="../ib.jpg"/>
+                   </div>
+               </div>
 
             </div>
         </div>

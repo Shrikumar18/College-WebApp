@@ -442,12 +442,8 @@
         <servlet-class>Mark.EndDate</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>EmailUtility</servlet-name>
-        <servlet-class>EmailUtility</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>SendMailAttachServlet</servlet-name>
-        <servlet-class>SendMailAttachServlet</servlet-class>
+        <servlet-name>SendMailAttach</servlet-name>
+        <servlet-class>API.SendMailAttach</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -812,14 +808,10 @@
     <servlet-mapping>
         <servlet-name>EndDate</servlet-name>
         <url-pattern>/EndDate</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping> 
-    <servlet-name>EmailUtility</servlet-name>
-        <url-pattern>/EmailUtility</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>SendMailAttachServlet</servlet-name>
-        <url-pattern>/SendMailAttachServlet</url-pattern>
+        <servlet-name>SendMailAttach</servlet-name>
+        <url-pattern>/SendMailAttach</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

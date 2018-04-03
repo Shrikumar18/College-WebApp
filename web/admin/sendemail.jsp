@@ -1,3 +1,4 @@
+<%@page import="java.sql.PreparedStatement"%>
 <%@page import="com.action.Find"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="dbconnection.dbcon"%>
@@ -14,10 +15,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link type="text/css" media="all" href="../wp-content/cache/autoptimize/css/autoptimize_0ec4a90d60c511554f757138ccde0bea.css" rel="stylesheet" /><title>Home</title>
         <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/sky-forms.css" rel="stylesheet">
 
         <!-- Custom CSS -->
         <link href="../css/simple-sidebar.css" rel="stylesheet">
-
 
 
     </head>
@@ -44,9 +45,8 @@
 
 
 
-
                             <nav id="main-nav">
-                                <ul id="menu-main-menu" class="menu"><li id="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="home.jsp">Home</a></li>
+                                <ul id="menu-main-menu" class="menu"><li id="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="home.jsp">Home</a></li>
                                     <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="">Academics</a>
                                         <ul class="sub-menu">
                                             <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="#">Batch</a>
@@ -55,7 +55,6 @@
                                                     <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="deletebatch.jsp">Delete Batch</a>
                                                 </ul>
                                             </li>
-
                                             <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="#">Academic Year</a>
                                                 <ul class="sub-menu">
                                                     <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="InsertYear.jsp">Insert Academic Year</a>
@@ -71,8 +70,8 @@
                                                             <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SubjectView.jsp?dept=<%=dept%>"><%=dept.toUpperCase()%></a>
                                                             <%}%></ul></li>
                                                 </ul></li>
-                                            <li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="FeeEntry.jsp">Fee Entry</a></li>
-                                        </ul>
+
+                                            <li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="FeeEntry.jsp">Fee Entry</a></li></ul>
                                     </li>
 
                                     <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="">Students</a>
@@ -86,19 +85,17 @@
                                                     <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="profiledelete.jsp">Delete Profile</a>
                                                 </ul></li>	
                                             <li id="menu-item-765" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-765"><a href="studentpasswords.jsp">Passwords</a>
-                                            <li id="menu-item-765" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-765"><a href="BulkUpdate.jsp">Bulk Update</a>
 
                                             </li>
                                         </ul>
                                     </li>
 
-                                    <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="">Staff</a>
+                                    <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768 current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="">Staff</a>
                                         <ul class="sub-menu">
                                             <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="#">Profile</a>
                                                 <ul class="sub-menu">
                                                     <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="staffprofileupdate.jsp">Add Profile</a>
                                                     <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="staffprofiledelete.jsp">Delete Profile</a>
-                                                    <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="StaffProfileEdit.jsp">Edit Profile</a>
                                                 </ul></li>	
 
 
@@ -144,8 +141,10 @@
                                             <li id="menu-item-765" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-765"><a href="verificationReport.jsp">Verification</a>
                                             <li id="menu-item-765" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-765"><a href="BoardingptReport.jsp">Boarding Point</a>
 
+
+                                            </li>
                                         </ul>
-                                    </li>   
+
                                 </ul>					
 
 
@@ -157,6 +156,63 @@
 
 
             <section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
+                        <center>
+                            <form action="${pageContext.request.contextPath}/SendMailAttach" method="post" class="sky-form" enctype="multipart/form-data">
+                                <table border="0" width="60%" align="center">
+                                    <header>E-mail</header>
+                                    <fieldset>					
+                                        <section>
+                                            <label class="input">
+                                                <div align="left" size="3px"><b>
+                                                        Recipient address </b></div>
+                                                <label class="input">
+
+                                                    <input type="text" id="batch" name="recipient">
+
+                                                    <i></i>
+                                                </label>
+                                            </label>
+                                            <br><br> <label class="input">
+                                                <div align="left" size="3px"><b>
+                                                        Subject </b></div>
+                                                <label class="input">
+
+                                                    <input type="text" id="batch" name="subject">
+
+                                                    <i></i>
+                                                </label>
+                                            </label>
+                                            <br><br> <label class="input">
+                                                <div align="left" size="3px"><b>
+                                                        Content </b></div>
+                                                <label class="input">
+
+                                                    <input type="text" id="batch" name="content">
+
+                                                    <i></i>
+                                                </label>
+                                            </label>
+                                            <br><br> <label class="input">
+                                                <div align="left" size="3px"><b>
+                                                        File: </b></div>
+                                                <label class="file">
+
+                                                    <input type="file" id="batch" name="file">
+
+                                                    <i></i>
+                                                </label>
+                                            </label>
+                                            <br><br>
+                                            <div align="right">
+                                                <input type="submit" id="submit" value="Submit" /></div>   
+
+                                        </section>
+                                    </fieldset>	
+                                </table>	
+                            </form>
+                        </center>
+
+
 
 
 
