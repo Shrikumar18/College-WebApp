@@ -222,7 +222,7 @@
 
                <div style=" clear:both; float:none; page-break-before: left;">
                    <div style="border: 2px; width: 1100px"><br><br>
-                       <img style="border: 2px; width: 1100px; height: 600px"  src="../ib.jpg"/>
+                       <img style="border: 2px; width: 1100px; height: 650px"  src="../ib.jpg"/>
                    </div>
                </div>
 

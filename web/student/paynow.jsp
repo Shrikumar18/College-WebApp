@@ -202,7 +202,8 @@
                                                             <option disabled selected>select</option>
                                                             <option value="offline">Via Challan In Indian Bank Counter</option>
                                                             <option value="indianbank">NetBanking (Indian Bank Only)</option>
-                                                            <option value="others">Credit/Debit Cards/Net Banking</option>
+                                                            <option value="tech">Credit/Debit Cards/Net Banking(TechProcess)</option>
+                                                            <option value="innotym">Credit/Debit Cards/Net Banking(Innotym)</option>
 
                                                         </select>
                                                         <i></i>
