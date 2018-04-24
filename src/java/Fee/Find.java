@@ -13,7 +13,7 @@ public class Find {
     
     public static String getFeeDetails(String type){
     if(type.equals("tution"))
-        return "Tuition Fee";
+        return "Tuition Fee & Development Charge";
     else if(type.equals("transport"))
         return "Transport, Breakfast, Tea,"
                              + "Lunch on working days and examination days. Snacks on evening special "
@@ -26,8 +26,6 @@ public class Find {
                                 + " <b>Optional</b>";
     else if(type.equals("hostel"))
         return "Hostel Fee<br><b>-Optional</b>";
-    else if(type.equals("development"))
-        return "Development Fee<br><b>-Optional</b>";
     else
         return null;
     }
