@@ -41,7 +41,7 @@
                 $("#marks").submit(function () {
                     flag = 0;
                     $(".marks").each(function (index) {
-                        var patt = /^[0-9]+$/;
+                        var patt = /^[0-9NA]+$/;
                         var result = patt.test($(this).val());
                         var result1 = ($(this).val() === 'A' || $(this).val() === 'N' || $(this).val() === 'null'||($(this).val() === '' && $(this).attr('placeholder') ==="NULL"));
                         if ( ($(this).val() === '' && $(this).attr('placeholder') !=="NULL" ) || (result === false && result1 === false))
@@ -133,7 +133,7 @@
                             if (Mark.isMarkAvailable(dept, m)) {
                                 m = Mark.getUserMark(dept, m);
                     %>
-                    <td><input type="text" size="3" class="marks" maxlength="3" name="<%=a1%>" id="<%=a1%>" value="<%=m.getMark()%>"></td>
+                    <td><input type="text" size="4" class="marks" maxlength="4" name="<%=a1%>" id="<%=a1%>" value="<%=m.getMark()%>"></td>
                         <%
                         } else {
                         %>

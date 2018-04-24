@@ -146,7 +146,7 @@
        // st1.setString(1, batch);
        // ResultSet rs1=st1.executeQuery();
        // while(rs1.next())
-       List<Student> blist=Student.getAll(dept, batch, "%");
+       List<Student> blist=Student.getAll(dept, batch, "_");
        for(Student s : blist)
        {    
             String rollno=s.getId();

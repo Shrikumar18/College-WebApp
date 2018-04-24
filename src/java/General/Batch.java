@@ -53,11 +53,12 @@ public class Batch {
     public static Batch getByYrIncharge(String id) {
         Batch b = new Batch();
         Connection conbatch = null;
-        Statement stmt = null;
+        PreparedStatement stmt = null;
         try {
             conbatch = new dbcon().getConnection("sjitportal");
-            stmt = conbatch.createStatement();
-            ResultSet rs = stmt.executeQuery("select * from regulations where batch in (select batch from yearincharge where id='" + id + "')");
+            stmt = conbatch.prepareStatement("select * from regulations where batch in (select batch from yearincharge where id=?)");
+            stmt.setString(1, id);
+            ResultSet rs = stmt.executeQuery();
 
             rs.beforeFirst();
             if (rs.next()) {
@@ -85,16 +86,45 @@ public class Batch {
         return b;
 
     }
+    public static Batch getByBatch(String batch){
+        Batch bt=new Batch();
+        Connection con = new dbcon().getConnection("sjitportal");
+        PreparedStatement st = null;
+        try {
+            String sql = "select * from regulations where batch=?";
+            st = con.prepareStatement(sql);
+            st.setString(1, batch);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                bt.setStatus(rs.getString("status"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (st != null) {
+                    st.close();
+                }
+                if (con != null) {
+                    ;//conbatch.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(Batch.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
 
+        return bt;
+
+    }
     public static List<Batch> getAll() {
 
         List<Batch> batch = new ArrayList<Batch>();
         Connection conbatch = null;
-        Statement stmt = null;
+        PreparedStatement stmt = null;
         try {
             conbatch = new dbcon().getConnection("sjitportal");
-            stmt = conbatch.createStatement();
-            ResultSet rs = stmt.executeQuery("select * from regulations");
+            stmt = conbatch.prepareStatement("select * from regulations");
+            ResultSet rs = stmt.executeQuery();
 
             rs.beforeFirst();
             while (rs.next()) {

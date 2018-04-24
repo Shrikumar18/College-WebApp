@@ -56,12 +56,18 @@ public class ExamUpdate extends HttpServlet {
                 for (Student stu : list) {
                     String a1 = stu.getId() + "_" + count;
                     mark = request.getParameter(a1);
-                    System.out.println(a1+" "+mark);
                     if (mark == null) {
                         continue;
                     }else if(mark.equals("null")){
                     continue;
                     }else if(mark.equals("")){
+                    continue;
+                    }else if(mark.equalsIgnoreCase("NA")){
+                    Mark m = new Mark();
+                    m.setRollno(stu.getId());
+                    m.setSubcode(subcode);
+                    m.setType(exam);
+                    String x = Mark.deleteMark(m);
                     continue;
                     }
                     Mark m = new Mark();

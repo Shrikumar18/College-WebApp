@@ -22,6 +22,10 @@ import java.util.logging.Logger;
  */
 public class Mark {
 
+//    static boolean isDateAvailable(String dept, EnddateCheck m) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+
     private String rollno;
     private String subcode;
     private String type;
@@ -71,6 +75,7 @@ public class Mark {
                 st.setString(3, m.getType());
                 st.setString(4, m.getMark());
                 st.executeUpdate();
+                System.out.println("Updated-"+m.getRollno()+"-"+m.getSubcode()+"-"+m.getType()+"-"+m.getMark());
                 return "Updated";
             } else {
                 String sql2 = "update marks set mark=? where rollno=? and subcode=? and type=?";
@@ -80,6 +85,7 @@ public class Mark {
                 st2.setString(3, m.getSubcode());
                 st2.setString(4, m.getType());
                 int i = st2.executeUpdate();
+                System.out.println("Updated-"+m.getRollno()+"-"+m.getSubcode()+"-"+m.getType()+"-"+m.getMark());
                 if (i == 1) {
                     return "Updated";
                 } else {
@@ -196,5 +202,20 @@ public class Mark {
             }
         }
         return list;
+    }
+    public static String deleteMark(Mark m){
+        try {
+            Connection con = new dbcon().getConnection(Find.sdept(m.getRollno()));
+            PreparedStatement st1 = null;
+            String sql1 = "delete from marks where  rollno=? and  subcode=? and  type=?";
+            st1 = con.prepareStatement(sql1);
+            st1.setString(1, m.getRollno());
+            st1.setString(2, m.getSubcode());
+            st1.setString(3, m.getType());
+            int i  = st1.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(Mark.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       return "Updated";
     }
 }

@@ -18,9 +18,7 @@
 
         <!-- Custom CSS -->
         <link href="../css/simple-sidebar.css" rel="stylesheet">
-
-
-    </head>
+        </head>
 
     <body class="home page page-id-115 page-template-default has-toolbar">
         <div id="wrapper" class="toggled">
@@ -69,8 +67,8 @@
                                                             <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SubjectView.jsp?dept=<%=dept%>"><%=dept.toUpperCase()%></a>
                                                             <%}%>     </ul></li>
                                                 </ul></li>
-                                            <li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="feedetails.jsp">Fee Details</a></li>
-                                        </ul>
+                                            
+                                            <li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="FeeEntry.jsp">Fee Entry</a></li></ul>
                                     </li>
 
                                     <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="">Students</a>
@@ -182,7 +180,14 @@
                                             </label>
                                         </label>
                                         <br><br> 
-                                        <div align="right">
+                    <input type="hidden" id="msgg" value="<%=request.getParameter("msg")%>"/>
+                    <script>
+                        var a=document.getElementById("msgg").value;
+                        if(a!=null){
+                            alert("Successfully Updated");
+                        }
+                    </script>
+                    <div align="right">
                                             <input type="submit" id="submit" value="Submit" /></div>
                                     </section>
                                 </fieldset>

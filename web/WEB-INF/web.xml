@@ -1,5 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+    <!-- SMTP settings -->
+    <context-param>
+        <param-name>host</param-name>
+        <param-value>smtp.gmail.com</param-value>
+    </context-param>
+    <context-param>
+        <param-name>port</param-name>
+        <param-value>25</param-value>
+    </context-param>
+    <context-param>
+        <param-name>port</param-name>
+        <param-value>587</param-value>
+    </context-param>
+    <context-param>
+        <param-name>user</param-name>
+        <param-value>noreply@stjosephstechnology.ac.in</param-value>
+    </context-param>
+    <context-param>
+        <param-name>pass</param-name>
+        <param-value>noreply@sjit</param-value>
+    </context-param>
     <filter>
         <filter-name>ImageFilter</filter-name>
         <filter-class>Filter.ImageFilter</filter-class>
@@ -8,6 +29,46 @@
         <filter-name>AdminFilter</filter-name>
         <filter-class>Filter.AdminFilter</filter-class>
     </filter>
+    <filter>
+        <filter-name>StudentFilter</filter-name>
+        <filter-class>Filter.StudentFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>AccountFilter</filter-name>
+        <filter-class>Filter.AccountFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>DeptFilter</filter-name>
+        <filter-class>Filter.DeptFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>ExamUpdateFIlter</filter-name>
+        <filter-class>Filter.ExamUpdateFIlter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>UpdateMarksFIlter</filter-name>
+        <filter-class>Filter.UpdateMarksFIlter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>UpdateMarksFIlter</filter-name>
+        <url-pattern>/UpdateMarks/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>ExamUpdateFIlter</filter-name>
+        <url-pattern>/ExamUpdate/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>DeptFilter</filter-name>
+        <url-pattern>/dept/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AccountFilter</filter-name>
+        <url-pattern>/account/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>StudentFilter</filter-name>
+        <url-pattern>/student/*</url-pattern>
+    </filter-mapping>
     <filter-mapping>
         <filter-name>AdminFilter</filter-name>
         <url-pattern>/admin/*</url-pattern>
@@ -376,6 +437,18 @@
         <servlet-name>EntryChallan</servlet-name>
         <servlet-class>Fee.EntryChallan</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EndDate</servlet-name>
+        <servlet-class>Mark.EndDate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SendMailAttach</servlet-name>
+        <servlet-class>API.SendMailAttach</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>receiveInnotymResponse</servlet-name>
+        <servlet-class>Fee.receiveInnotymResponse</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -735,6 +808,18 @@
     <servlet-mapping>
         <servlet-name>EntryChallan</servlet-name>
         <url-pattern>/EntryChallan</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EndDate</servlet-name>
+        <url-pattern>/EndDate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SendMailAttach</servlet-name>
+        <url-pattern>/SendMailAttach</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>receiveInnotymResponse</servlet-name>
+        <url-pattern>/receiveInnotymResponse</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
