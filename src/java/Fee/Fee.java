@@ -14,7 +14,7 @@ import java.util.List;
  * @author Home
  */
 public class Fee {
-    private static final String[] subCategory={"tution","transport","placement"};//hostel yet to decide
+    private static final String[] subCategory={"tution","transport","placement","development"};//hostel yet to decide
     public static final String[] getsubCategory(){
     
     return subCategory;

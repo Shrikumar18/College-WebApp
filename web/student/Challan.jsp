@@ -145,6 +145,7 @@
                         if (type.equals("tution")) {
                             Amount += String.valueOf((Integer.valueOf(f.getByType(type)) + Integer.valueOf(f.getByType("development")))) + "<br><br><br><br><br><br><br><br>";
                             sum += (Integer.valueOf(f.getByType(type)) + Integer.valueOf(f.getByType("development")));
+                        } else if (type.equals("development")) {
                         } else {
                             Amount += f.getByType(type) + "<br><br><br><br><br><br><br><br>";
                             sum += Integer.valueOf(f.getByType(type));
