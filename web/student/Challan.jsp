@@ -4,6 +4,10 @@
     Author     : Lenovo
 --%>
 
+<%@page import="Fee.IBResponse"%>
+<%@page import="Fee.InnotymResponse"%>
+<%@page import="Fee.TechProcessResponse"%>
+<%@page import="Fee.TechProcess"%>
 <%@page import="java.time.LocalDate"%>
 <%@page import="Fee.MUResponse"%>
 <%@page import="java.util.Date"%>
@@ -31,9 +35,19 @@
                 session.setAttribute("deptname", Find.sdept(username));
                 MUResponse mu = (MUResponse) session.getAttribute("MUResponse");
                 boolean feepaid = false;
+                String date = Find.getFormattedDate();
                 if (request.getAttribute("paid") != null) {
                     if (request.getAttribute("paid").toString().equals("Y")) {
                         feepaid = true;
+                        IBResponse i = IBResponse.getByMup(mu.getRefno());
+                        TechProcessResponse t = TechProcessResponse.getByMup(mu.getRefno());
+                        if (t != null) {
+                            String[] split = t.getTime().split(" ");
+                            date = split[0];
+                        } else if (i != null) {
+                            String[] split = i.getTxndate().split(" ");
+                            date = split[0];
+                        }
                     }
                 }
                 String mupno = mu.getRefno();
@@ -41,7 +55,7 @@
     %>
 
     <%!
-        public String getsubContent(Student s, String details, String amount, String copyof, String tot, boolean feepaid, String mupno) {
+        public String getsubContent(Student s, String details, String amount, String copyof, String tot, boolean feepaid, String mupno, String Date) {
             String data;
             String paid = "";
             if (feepaid) {
@@ -57,7 +71,7 @@
                     + "                        <div style=\"float: right; width: 55px; height: 65px;\"><img src=\"./css/images/ib.jpg\" alt=\"logo\" height=\"60\" width=\"60\"></div>\n"
                     + "                     </div>\n"
                     + "                     <div style=\"clear: both; padding-top: 3px;\">\n"
-                    + "                        <div style=\"text-align: right;\">Date : " + Find.getFormattedDate() + "</div>\n"
+                    + "                        <div style=\"text-align: right;\">Date : " + Date + "</div>\n"
                     + "                     </div>\n"
                     + "                     <div style=\"text-align: center;\">Paid into the Credit of</div>\n"
                     + "                     <div style=\"text-align: center;font-size:15px; font-weight: bold;\">St.Joseph's Institute of Technology</div>\n"
@@ -90,17 +104,17 @@
     %>
 
     <%!
-        public String getContent(Student s, String details, String amount, String tot, boolean feepaid, String mupno) {
+        public String getContent(Student s, String details, String amount, String tot, boolean feepaid, String mupno, String date) {
             String data;
             data = "          <div style=\"float: left;position:relative; width: 30%; line-height: 22px;\">\n"
-                    + "                      \n" + getsubContent(s, details, amount, "BANK", tot, feepaid, mupno)
+                    + "                      \n" + getsubContent(s, details, amount, "BANK", tot, feepaid, mupno, date)
                     + "                     \n"
                     + "                  </div>\n"
                     + "                  <div style=\"float: left;position:relative; width:30%; line-height: 22px;padding-left: 15px;margin-left: 15px; border-left: 2px solid #222;\">\n"
-                    + "                \n" + getsubContent(s, details, amount, "COLLEGE", tot, feepaid, mupno)
+                    + "                \n" + getsubContent(s, details, amount, "COLLEGE", tot, feepaid, mupno, date)
                     + "                  </div>\n"
                     + "                  <div style=\"float: left;position:relative; width: 30%; line-height: 22px;padding-left: 15px;margin-left: 15px; border-left: 2px solid #222;\">\n"
-                    + "                  \n" + getsubContent(s, details, amount, "STUDENT'S", tot, feepaid, mupno)
+                    + "                  \n" + getsubContent(s, details, amount, "STUDENT'S", tot, feepaid, mupno, date)
                     + "                  </div>\n"
                     + "               </div>";
 
@@ -163,7 +177,7 @@
                     <%}%>
                     <div style="border: 2px solid  #000; padding-left: 7px; float: left; padding-right: 7px;">
                         <div style="float: none; clear: both;">
-                            <%=getContent(s, Detail + bankcharge, Amount + bankamount, String.valueOf((sum + bankchr)), feepaid, mupno)%>
+                            <%=getContent(s, Detail + bankcharge, Amount + bankamount, String.valueOf((sum + bankchr)), feepaid, mupno, date)%>
                         </div>
                     </div>
                 </div>
