@@ -164,7 +164,9 @@
                             Amount += f.getByType(type) + "<br><br><br><br><br><br><br><br>";
                             sum += Integer.valueOf(f.getByType(type));
                         }
-                        Detail += Fee.Find.getFeeDetails(type) + "<br><br>";
+                        if (!type.equals("development")) {
+                            Detail += Fee.Find.getFeeDetails(type) + "<br><br>";
+                        }
                     }
                 %>
 
