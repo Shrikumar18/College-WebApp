@@ -402,8 +402,11 @@ and open the template in the editor.
                                 }
                                      if(markm3!=null && !markm3.equals("A") && !markm3.equals("N")){
                                        total += Integer.parseInt(markm3);
+<<<<<<< HEAD
                                        if(Integer.parseInt(markm3)<45){
-
+=======
+                                        if(Integer.parseInt(markm3)<45){
+>>>>>>> 023b07780eafef34c792adede8a95f5d5e76fb6e
                                            if(zmarkm3!=null && !zmarkm3.equals("A") && !zmarkm3.equals("N")){
                                                
                                                if(Integer.parseInt(zmarkm3)>=45){
