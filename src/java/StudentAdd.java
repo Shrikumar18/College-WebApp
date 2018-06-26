@@ -4,11 +4,9 @@
  * and open the template in the editor.
  */
 
-import API.Authenticate;
 import Actor.Student;
 import com.action.Find;
 import com.action.GeneratePassword;
-import com.action.SMSTemplate;
 import dbconnection.dbcon;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -344,13 +342,7 @@ public class StudentAdd extends HttpServlet {
       
       if(update==13)
       {
-          Authenticate a = new Authenticate();
-          a.setUsername(rollno);
-          String msg = "Welcome to St.Josephs Portal, "
-                  + "portal.stjosephstechnology.ac.in "
-                  + "Your Login Id = "+rollno+" and Password = "+a.findPassword()+"";
-          String res=SMSTemplate.send(Student.getById(rollno).getFatherDetails().getMobile(),msg);
-          response.sendRedirect("admin/studentSuccessForm.jsp?rollno="+rollno+"&msg="+res+"");
+          response.sendRedirect("admin/studentSuccessForm.jsp?rollno="+rollno);
               //  response.getWriter().print("Successfully Added!!");
       } if(stmt!=null)
                             stmt.close();

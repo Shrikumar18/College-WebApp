@@ -88,10 +88,8 @@ public class LoginServlet extends HttpServlet {
                             response.sendRedirect("staff/home.jsp?user=" + s1);
                         } else if (s3.equals("first")) {
                             response.sendRedirect("firstyr/home.jsp?user=" + s1);
-                        } else if (s3.equals("admin")) {
+                        } else if (s3.equals("admin") || s3.equals("dataentry")) {
                             response.sendRedirect("admin/home.jsp?user=" + s1);
-                        } else if (s3.equals("dataentry")) {
-                            response.sendRedirect("dataentry/home.jsp?user=" + s1);
                         } else if (s3.equals("reception")) {
                             response.sendRedirect("reception/home.jsp?user=" + s1);
                         } else if (s3.equals("dept")) {
