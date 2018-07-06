@@ -28,7 +28,8 @@ import org.jsoup.select.Elements;
  */
 public class SMSTemplate {
 public static String sendwithID(String number,String message,String id){
-        String txnid="";
+        String txnid="i";
+        String s = new String();
          InputStream input = null;
             HttpURLConnection connection = null;
             int sent=0;
@@ -65,7 +66,7 @@ public static String sendwithID(String number,String message,String id){
                // number="9444902605";
                 number.trim();
                 message=message.replace(" ","%20").replace("'", "%27");
-                String surl="http://5.9.2.244/API/pushsms.aspx?loginID="+user+"&password="+pass+"&mobile="+number+"&text="+message+"&senderid="+id+"&route_id=2&Unicode=0";
+                String surl="http://88.99.238.118/API/pushsms.aspx?loginID="+user+"&password="+pass+"&mobile="+number+"&text="+message+"&senderid="+id+"&route_id=2&Unicode=0";
               //  String surl="http://88.198.25.115/API/pushsms.aspx";
                
               //surl=surl.replace("&","%26");
@@ -85,7 +86,7 @@ public static String sendwithID(String number,String message,String id){
                 connection.connect();
                 input = connection.getInputStream();
                 char c;
-                String s = new String();
+                
                 while ((c = (char) input.read()) != (char) -1)
                     s += c;
                 
