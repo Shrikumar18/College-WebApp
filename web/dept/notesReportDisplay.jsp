@@ -264,10 +264,10 @@ h2{
     //                 Statement st6 = con.createStatement();
       //               Statement st7 = con.createStatement();
 
-                      PreparedStatement st=con.prepareStatement("select * from subject_sem_table where sem=? and (ayear like '%elective%'?'%'or ayear like 'all') and regulation=? and subtype='theory'");
+                      PreparedStatement st=con.prepareStatement("select * from subject_sem_table where sem=? and (ayear like 'elective%"+ayear+"' or ayear like 'all') and regulation=? and subtype='theory'");
                       st.setString(1, semester);
-                      st.setString(2, ayear);
-                      st.setString(3, regulation);
+                      //st.setString(2, ayear);
+                      st.setString(2, regulation);
                               
                     rs=st.executeQuery();    
                         while(rs.next())
@@ -308,7 +308,7 @@ h2{
             list3.add("unit_keys");
             list3.add("unit_keys");
             list3.add("unit_keys");
-            list4.add("syallabus");
+            list4.add("Syllabus");
             list4.add("prev_univ_quest");
             list4.add("prev_univ_ans");
 
@@ -330,10 +330,10 @@ h2{
             list8.add("Prev univ answers");
                         }
                     int i,j,k,l,m,n,o,p;
-                        PreparedStatement st1=con.prepareStatement("select * from subject_sem_table where sem=? and (ayear like '%elective%'?'%'or ayear like 'all') and regulation=? and subtype='theory'");
+                        PreparedStatement st1=con.prepareStatement("select * from subject_sem_table where sem=? and (ayear like '%elective%"+ayear+"'or ayear like 'all') and regulation=? and subtype='theory'");
                         st1.setString(1, semester);
-                        st1.setString(2, ayear);
-                        st1.setString(3, regulation);
+                        //st1.setString(2, ayear);
+                        st1.setString(2, regulation);
                             rs1=st1.executeQuery();    
                         while(rs1.next())
                         {
@@ -444,7 +444,7 @@ h2{
                             for(p=0;p<list9.size();p++){
                             String h[]=new String[35];
                             h[p]=list9.get(p);
-                            PreparedStatement st6=con.prepareStatement("select * from notes where subcode=? and sem=? and acadamic_yr=? and notes_type=? and subCategory='"+(o+1)+"'");
+                            PreparedStatement st6=con.prepareStatement("select * from notes where subcode=? and sem=? and acadamic_yr=? and notes_type=?");
                             st6.setString(1, h[p]);
                             st6.setString(2, semester);
                             st6.setString(3, ayear);

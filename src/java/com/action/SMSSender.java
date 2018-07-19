@@ -7,27 +7,14 @@ package com.action;
 
 import Actor.Parent;
 import com.google.gson.Gson;
-import dbconnection.dbcon;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
 
 /**
  *
@@ -104,7 +91,7 @@ public class SMSSender extends HttpServlet {
                         if(!SMSTemplate.send(number, message).equals(""))
                         json = new Gson().toJson("Sent");
                         else
-                        json = new Gson().toJson("Error: "+number+message);    
+                        json = new Gson().toJson("Error: "+ number+ message);    
                         response.setContentType("application/json");
                         response.getWriter().write(json);
     
