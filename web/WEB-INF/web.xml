@@ -449,6 +449,10 @@
         <servlet-name>receiveInnotymResponse</servlet-name>
         <servlet-class>Fee.receiveInnotymResponse</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UniversityUpdate</servlet-name>
+        <servlet-class>Mark.UniversityUpdate</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -820,6 +824,10 @@
     <servlet-mapping>
         <servlet-name>receiveInnotymResponse</servlet-name>
         <url-pattern>/receiveInnotymResponse</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UniversityUpdate</servlet-name>
+        <url-pattern>/UniversityUpdate</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

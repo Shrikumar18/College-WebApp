@@ -1,8 +1,3 @@
-<%-- 
-    Document   : LaModelbMark
-    Created on : Sep 24, 2017, 11:21:54 PM
-    Author     : irshed
---%>
 <%@page import="General.AcademicYear"%>
 <%@page import="General.Batch"%>
 <%@page import="com.action.Find"%>
@@ -89,7 +84,6 @@
                                     </li>
                                 </ul>
                                 </li>
-
 <li id="menu-item-764" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="#">University Result</a>
 <ul class="sub-menu">
                                            <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="viewResult.jsp">View Results</a></li>
@@ -97,6 +91,7 @@
                                 
                                 </ul>
 </li>
+
 
                                 <li id="menu-item-764" class="menu-item menu-item-type-post_type menu-item-object-page  "><a href="#">Report Generation</a>
                                     <ul class="sub-menu">
@@ -107,7 +102,7 @@
 
 
 
-                                </li>
+                                
                                 </ul>
                                 </li>
 
@@ -126,7 +121,6 @@
                                 </li>
 
 
-                                <li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="ModelLabMark.jsp">Model Lab</a>
 
                                 <li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="circular.jsp">Circular</a>
                                 <li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="events.jsp">Events</a>
@@ -142,8 +136,8 @@
 
 
             <section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
-                        <center>  <form action="EditLabMark.jsp" class="sky-form" method="post" target="_blank">
-                                <header>Model Lab Mark Update</header>
+                        <center>  <form action="EditResult.jsp" class="sky-form" method="post" target="_blank">
+                                <header>Update Results</header>
                                 <fieldset>					
                                     <section>
                                         <label class="input">
@@ -171,8 +165,10 @@
                                                 </select>
                                                 <i></i>
                                             </label>
+                                                   
                                         </label>
-                                        <br> <br>
+                                                    <br> <br>
+                                                     
 
                                         <label class="input">
                                             <div align="left" size="3px"><b>
@@ -187,6 +183,23 @@
                                                 <i></i>
                                             </label></label>
                                         <br> <br>
+                                        <label class="input">
+                                            <div align="left" size="3px"><b>
+                                                    Section </b></div>
+                                            <label class="select">
+
+                                                <select id="section" name="section" required>
+                                                    <option disabled selected>select</option>
+                                                    <option value="A">A</option>
+                                                    <option value="B">B</option>
+                                                    <option value="C">C</option>
+                                                    <option value="D">D</option>
+                                                </select>
+                                                <i></i>
+                                            </label>
+                                        </label>
+                                        <br> <br>
+
                                         <label class="input">
                                             <div align="left" size="3px"><b>
                                                     SEM </b></div>
@@ -207,20 +220,7 @@
                                                 <br> <br>
                                             </label></label>
 
-                                        <label class="input">
-                                            <div align="left" size="3px"><b>
-                                                    EXAM</b></div>
-                                            <label class="select">
-
-                                                <select id="exam" name="exam" required>
-                                                    <option disabled selected>select</option>
-                                                    <option value="modellab1">Model Lab 1</option>
-                                                    <option value="modellab2">Model Lab 2</option>
-                                                    <option value="modellab3">Model Lab 3</option>
-                                                </select>
-                                                <i></i>
-                                                <br> <br>
-                                            </label></label>
+                                       
                                     </section>
 
 
@@ -280,7 +280,7 @@
                             sttt.close();
                         }
                         if (connn != null) {
-                            connn.close();
+                            ;//connn.close();
                         }
                     } catch (Exception e) {
                         e.printStackTrace();

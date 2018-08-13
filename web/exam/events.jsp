@@ -84,6 +84,14 @@
 </li>
 </ul>
 </li>
+<li id="menu-item-764" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="#">University Result</a>
+<ul class="sub-menu">
+                                           <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="viewResult.jsp">View Results</a></li>
+                                        <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="updateResult.jsp">Update Results</a></li>
+                                
+                                </ul>
+</li>
+
 
 
                                                             <li id="menu-item-764" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="#">Report Generation</a>
@@ -98,7 +106,9 @@
 </li>
 </ul>
 </li>
+<li id="menu-item-764" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="univResult.jsp">University Result</a>
 
+</li>
 
 
                                                             <li id="menu-item-764" class="menu-item menu-item-type-post_type menu-item-object-pag"><a href="#">Student</a>

@@ -1,18 +1,15 @@
-<%-- 
-    Document   : BonusQuery
-    Created on : 25 Aug, 2016, 7:54:36 PM
-    Author     : Home
---%>
-
+<%@page import="General.AcademicYear"%>
+<%@page import="java.util.List"%>
 <%@page import="General.Batch"%>
+<%@page import="java.sql.PreparedStatement"%>
 <%@page import="com.action.Find"%>
-<%@page import="dbconnection.dbcon"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
+<%@page import="dbconnection.dbcon"%>
 <%@page import="java.sql.Connection"%>
 <!DOCTYPE html>
 <html lang="en-US">
-    <% 
+      <% 
    try
     {
     String username = session.getAttribute("username").toString();
@@ -20,15 +17,15 @@
     
     Connection connn = new dbcon().getConnection("login");
     Statement sttt = connn.createStatement();
-    String type1 ="";
+    String type ="";
     ResultSet rsss = sttt.executeQuery("select * from other_login_details where id='"+username+"' and password='"+password+"'");
     if(rsss.isBeforeFirst())
     {
         while(rsss.next())
         {
-            type1 = rsss.getString("type");
+            type = rsss.getString("type");
         }
-        if(type1.equals("exam"))
+        if(type.equals("exam"))
         {
     
     
@@ -69,25 +66,20 @@
 
 						
 						
-
-						
-						
-
-
-
-                        
-						<nav id="main-nav">
+				
+<nav id="main-nav">
 							<ul id="menu-main-menu" class="menu"><li id="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="home.jsp">Home</a></li>
 
     
 
 
-                                                            <li id="menu-item-764" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="#">Marks</a>
+                                                            <li id="menu-item-764" class="menu-item menu-item-type-post_type menu-item-object-page   current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="#">Marks</a>
 <ul class="sub-menu">
 	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="updatemarks.jsp">Update Marks</a></li>
 	
 	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="viewmark.jsp">View Marks</a></li>
         <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="ExamDate.jsp">End Date Entry</a></li>
+        
         
 	
 </li>
@@ -100,6 +92,8 @@
                                 
                                 </ul>
 </li>
+
+
 
                                                             <li id="menu-item-764" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="#">Report Generation</a>
 <ul class="sub-menu">
@@ -116,15 +110,14 @@
 
 
 
-                                                            <li id="menu-item-764" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="#">Student</a>
+                                                            <li id="menu-item-764" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="#">Student</a>
 <ul class="sub-menu">
 	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="updatemodeltype.jsp">Update Model Type</a></li>
 	
 	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="regnoupdate.jsp">Update Register No.</a></li>
 	
 	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="BonusQuery.jsp">Bonus Assignment</a></li>
-        	
-	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="StudentNo.jsp">Student no display</a></li>
+                <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="StudentNo.jsp">Student no display</a></li>
 
 </ul>
 </li>
@@ -137,47 +130,59 @@
 
 <li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="examuploads.jsp">Exam Uploads</a>
 
-</li></ul>						</nav>				</div>
+</li></ul>						</nav>	
+						
+						
+
+						
+					</div>
 				</div>
 			</div>
 		</header>
 
-
+    
 <section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
-
-
-<center>  <form action="BonusRemoval.jsp" class="sky-form" method="post" target="_blank">
-    <header>Bonus Removal</header>
+            <center>  <form action="../marks/dispmark.jsp" class="sky-form" method="post" target="_blank">
+    <header>View Results</header>
     <fieldset>					
 					<section>
-						
-                                           <label class="input">
-                                            <div align="left" size="3px"><b>DEPARTMENT</b></div>
-                                            <label class="select">
-
-                                                <select id="dept" name="dept" required>
-                                                    
+						<label class="input">
+                                                    <div align="left" size="3px"><b>DEPARTMENT</b></div>
+							<label class="select">
+           
+               <select id="dept" name="dept" required>
+               
                    <%=Find.getDeptHTMLContent() %>
+               
+            </select>
+                    <i></i>                                    </label>
+                                                </label>
+                                        
+                                            <br><br>
+                                              <label class="input">
+                                            <div align="left" size="3px"><b>
+                                                    Academic Year:</b></div>
+                                            <label class="select">
+                                                <select id="ayear" name="ayear">
+                                                    <option>Select</option>
+                                                    <%=AcademicYear.getHTMLContent()%>  
                                                 </select>
-                                                <i></i>                                    </label>
+                                                <i></i>
+                                            </label>
                                         </label>
-
-                                        <br><br>
-   
+                                        <br> <br>
             
             <label class="input">
                                                     <div align="left" size="3px"><b>
                                                             Batch:</b></div>
                 <label class="select">
             <select id="batch" name="batch" required>
-                <option disabled selected>Select</option>
-                     <%=Batch.getHTMLContent()%>
-                
+                <option disabled selected>Select   </option>
+                <%=Batch.getHTMLContent() %>
             </select>
                     <i></i>
                 </label></label>
-
-                                        <br> <br>
+            <br> <br>
             <label class="input">
                                                     <div align="left" size="3px"><b>
                                                              Section </b></div>
@@ -215,21 +220,7 @@
             <br> <br>
                 </label></label>
             
-            <label class="input">
-                                                    <div align="left" size="3px"><b>
-                                                             ASSESSMENT</b></div>
-                <label class="select">
-            
-            <select id="exam" name="exam" required>
-                <option disabled selected>select</option>
-                <option value="1">Model 1</option>
-                <option value="2">Model 2</option>
-                <option value="3">Model 3</option>
-               
-            </select>
-                    <i></i>
-            <br> <br>
-                </label></label>
+           
                                         </section>
             
                            
@@ -238,10 +229,11 @@
             <br>
     </fieldset>
                 </form></center>
-</div></div></section>
 
 </section>
-						<footer id="footer-widgets">
+
+</section>
+								<footer id="footer-widgets">
 			<div class="container clearfix">
 								Powered by St.Joseph's
 							</div>
@@ -250,7 +242,7 @@
 			</div>
 			</div>
 
-<footer id="page-footer">
+	<footer id="page-footer">
 		<div class="container clearfix">
 			<div class="copy"></div>
 			<nav id="footer-nav">
@@ -271,16 +263,7 @@
     <script src="../js/bootstrap.min.js"></script>
 
     <!-- Menu Toggle Script -->
-    <script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-     $("#menu-toggle1").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-    </script>
+    
 
 
 <script type="text/javascript" defer src="../wp-content/cache/autoptimize/js/autoptimize_b9dd1eab85c72cde0d539343c70a43c2.js"></script></body>
