@@ -1,9 +1,11 @@
 <%-- 
-    Document   : dispmark
+    Document   : ResultDisplay
     Created on : 31 Jul, 2018, 11:30:31 AM
     Author     : vignesh
 --%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="General.AcademicYear"%>
 <%@page import="Mark.University"%>
 <%@page import="Mark.Mark"%>
 <%@page import="Actor.Student"%>
@@ -32,13 +34,17 @@
         String sec = request.getParameter("section");
         String sem = request.getParameter("sem");
         //String exam = request.getParameter("exam");
-        String ayear = request.getParameter("ayear");
+       // String ayear = request.getParameter("ayear");
         String regulation = Batch.getRegulation(batch);
+         AcademicYear a = new AcademicYear();
+        String ayear = a.getYearString();
+        String subject = request.getParameter("subject");
         session.setAttribute("regulation", regulation);
         session.setAttribute("sem", sem);
         session.setAttribute("batch", batch);
         session.setAttribute("sec", sec);
         session.setAttribute("dept", dept);
+        session.setAttribute("subject", subject);
         //session.setAttribute("exam", exam);
         /*String sss = exam.toUpperCase();
         if(exam.contains("unit")){
@@ -61,11 +67,11 @@
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            Academic Year: 20<%=ayear%>-20<%=(Integer.valueOf(ayear) + 1)%></h3>
+            Academic Year: <%=ayear%></h3>
             <% for (Batch b : Batch.getAll()) {
                     if (b.getBatch().equals(batch)) {
             %>
-        <h3 style="">Year/Sec: <%=b.getStatus()%>-<%=dept.toUpperCase()%>-<%=sec%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <h3 style="">Year/Sec: <%=b.getStatus()%>-<%=dept.toUpperCase()%>-<%=sec.toUpperCase()%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             &nbsp;&nbsp;&nbsp;&nbsp;
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -98,11 +104,8 @@
                                 s.setAyear(ayear);
                                 s.setRegulation(regulation);
                                 s.setSem(sem);
-                                List<String> Subcodelist;
-                               Subcodelist= Subjects.getLabSubCode(dept, s);
-                                int l;
-                                for(l=0;l<Subjects.getTherorySubCode(dept, s).size();l++)
-                                    Subcodelist.add(Subjects.getTherorySubCode(dept, s).get(l));
+                                List<String> Subcodelist = new ArrayList();
+                                   Subcodelist.add(subject);
                                 for (String subcode : Subcodelist) {
                             %>
                         <th><%=subcode%></th>

@@ -198,7 +198,7 @@ public class Find {
         int temp = Integer.valueOf(batch.substring(2, 4));
         temp = Integer.valueOf(acyr) - temp;
         temp *= 2;
-        if (semister.equals("Odd")) {
+        if (semister.equals("odd")) {
             temp++;
         } else {
             temp += 2;

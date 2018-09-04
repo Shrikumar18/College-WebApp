@@ -27,7 +27,6 @@ public class Subjects {
     private String sem;
     private String subtype;
     private String ayear;
-
     public String getSubcode() {
         return subcode;
     }
@@ -75,7 +74,6 @@ public class Subjects {
     public void setAyear(String ayear) {
         this.ayear = ayear;
     }
-
     public static List<String> getTherorySubCode(String dept, Subjects s) throws SQLException {
         List<String> subcode = new ArrayList<String>();
         PreparedStatement st = null;

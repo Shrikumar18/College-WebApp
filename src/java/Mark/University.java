@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -84,15 +85,15 @@ public class University {
             } else {
                 String newmark = m.getResult();
                 String oldmark = University.getUserMark(dept, m).getResult();
-                String sql2 = "update univ_result set result=? and recentSemOfExam=?  where rollno=? and subcode=? and sem=? ";
+                String sql2 = "update univ_result set result=? ,recentSemOfExam=? where rollno=? and subcode=? and sem=? ";
                 st2 = con.prepareStatement(sql2);
                 st2.setString(1, oldmark+","+newmark);
-                st2.setString(2, m.getRollno());
-                st2.setString(3, m.getSubcode());
-                st2.setString(4, m.getSem());
-                st2.setString(5, m.getSemester());
+                st2.setString(3, m.getRollno());
+                st2.setString(4, m.getSubcode());
+                st2.setString(5, m.getSem());
+                st2.setString(2, m.getSemester());
                 int i = st2.executeUpdate();
-                System.out.println("Updated-"+m.getRollno()+"-"+m.getSubcode()+"-"+m.getSem()+"-"+m.getResult()+"-"+m.getSemester());
+                System.out.println("Updated-"+m.getRollno()+"-"+m.getSubcode()+"-"+m.getSem()+"-"+oldmark+","+newmark+"-"+m.getSemester());
                 if (i == 1) {
                     return "Updated";
                 } else {
@@ -225,5 +226,22 @@ public class University {
         }
        return "Updated";
     }
-
+    public static String getCurrentSem(String batch,String ayear)
+    {
+           
+            int s1 = Calendar.getInstance().get(Calendar.MONTH);
+         s1 = s1 + 1;
+         String semset="";
+         if(s1>=6 && s1<=11)
+         {
+             semset = "odd";
+         }   
+         else
+         {
+             semset = "even";
+         }//String semest = Integer.toString(s);
+        int seme = Find.getSem(batch, ayear, semset);
+        String semester = Integer.toString(seme); 
+    return semester;
+    }
 }

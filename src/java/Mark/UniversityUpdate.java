@@ -8,10 +8,8 @@ package Mark;
 import Actor.Student;
 import General.Batch;
 import Subjects.Subjects;
-import com.action.Find;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Calendar;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -37,20 +35,7 @@ public class UniversityUpdate extends HttpServlet{
         String sem = request.getParameter("sem");
        // String exam = request.getParameter("exam");
         String ayear = request.getParameter("ayear");
-       // String semester = request.getParameter("semester");
-        int s1 = Calendar.getInstance().get(Calendar.MONTH);
-         s1 = s1 + 1;
-         String semset="";
-         if(s1>=6 && s1<=11)
-         {
-             semset = "odd";
-         }   
-         else
-         {
-             semset = "even";
-         }//String semest = Integer.toString(s);
-        int seme = Find.getSem(batch, ayear, semset);
-        String semester = Integer.toString(seme); 
+        String semester = University.getCurrentSem(batch, ayear);
         String regulation = Batch.getRegulation(batch);
             String mark;
             int count = 0;
@@ -63,6 +48,7 @@ public class UniversityUpdate extends HttpServlet{
                                 int l;
                                 for(l=0;l<Subjects.getTherorySubCode(dept, s).size();l++)
                                     Subcodelist.add(Subjects.getTherorySubCode(dept, s).get(l));
+                                
                                // Subcodelist= Subjects.getTherorySubCode(dept, s);
         for (String subcode : Subcodelist) {
                 List<Student> list = Student.getAll(dept, batch, sec);
