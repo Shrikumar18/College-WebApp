@@ -5,6 +5,7 @@
  */
 package Mark;
 
+import General.AcademicYear;
 import com.action.Find;
 import dbconnection.dbcon;
 import java.sql.Connection;
@@ -229,17 +230,8 @@ public class University {
     public static String getCurrentSem(String batch,String ayear)
     {
            
-            int s1 = Calendar.getInstance().get(Calendar.MONTH);
-         s1 = s1 + 1;
-         String semset="";
-         if(s1>=6 && s1<=11)
-         {
-             semset = "odd";
-         }   
-         else
-         {
-             semset = "even";
-         }//String semest = Integer.toString(s);
+         //String semest = Integer.toString(s);
+        String semset = AcademicYear.getCurrentYear().getCurrent();
         int seme = Find.getSem(batch, ayear, semset);
         String semester = Integer.toString(seme); 
     return semester;
