@@ -109,13 +109,19 @@
                             <%
                                 }
                             %>
+                        <th>GPA</th>
                         <th>Signature</th>
                     </tr>
                 </thead>
                 <%
                     int i = 0;
+                    
                     List<Student> list = Student.getAll(dept, batch, sec);
                     for (Student stu : list) {
+                        double gpa = 0;
+                        int credits = 0;
+                    int total_gpa = 0,flag = 0;
+                    String result = null;
                 %>
                 <tr>
                     <td><%= i+1 %></td>
@@ -127,10 +133,28 @@
                             m.setRollno(stu.getId());
                             m.setSubcode(subcode);
                             m.setSem(sem);
+                            char credit = University.getCredits(subcode);
+                            credits += credit-'0';
+                            String grade = University.getUserMark(dept, m).getResult();
+                           
                     %>
-                    <td><%=University.getUserMark(dept, m).getResult()%></td>
+                    <td><%=grade%></td>
                     <%
-                        } i++;
+                        if(grade.equals("U"))   
+                        {
+                            result = "-";
+                            flag = 1;
+                        }
+                        else if(flag==0){
+                    total_gpa += (credit-'0') * (University.getPoints(grade));
+                    gpa = (total_gpa*1.0)/credits;
+                    result = String.format("%.2f", gpa);
+                        }
+                    %>
+                    
+                        <%}%>
+                        
+                        <% i++;
                     %><td></td>
                     <%                        
                     }

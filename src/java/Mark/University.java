@@ -6,12 +6,14 @@
 package Mark;
 
 import General.AcademicYear;
+import Subjects.Subjects;
 import com.action.Find;
 import dbconnection.dbcon;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -238,4 +240,39 @@ public class University {
         String semester = Integer.toString(seme); 
     return semester;
     }
+    public static Character getCredits(String subcode) throws SQLException
+    {
+        String credit = null;
+        try
+        {
+        Connection con = new dbcon().getConnection("sjitportal");
+        Statement st1 = null;
+        String sql1 = "select c from subject_table where subcode='"+subcode+"'";
+        st1 = con.createStatement();
+        ResultSet rs = st1.executeQuery(sql1);
+        if(rs.next())
+        {
+            credit = rs.getString("c");
+        }
+        }
+        catch(SQLException ex)
+        {
+            Logger.getLogger(Mark.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return credit.charAt(0);
+    }
+    public static int getPoints(String grade)
+    {
+        int points = 0;
+        if(grade.equals("S"))
+        {
+            points = 10;
+        }
+        else
+        {
+            points = ('A'-grade.charAt(grade.length()-1))+9;
+        }
+        return points;
+    }
+        
 }
